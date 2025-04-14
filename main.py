@@ -1,13 +1,15 @@
-from window import create_window
-from list_function import append_item, remove_item, clear_list, print_grocery_list, add_value_to_list
+from window import Window
+# from list_function import append_item, remove_item, clear_list, print_grocery_list, add_value_to_list
 
 def main():
 
-    create_window()
+    path = "todo.txt";
+    window = Window(path)
+
+    window.create_window()
 
     # print("Grocery List")
 
-    # path = "todo.txt";
     # answer = input("Do you want add item (a), remove item (r), clear list (c), print list (p) or exit (e)?: ").lower().strip()
 
     # while True:
