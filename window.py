@@ -45,6 +45,22 @@ class Window:
 			entry.delete(0, tk.END)
 
 
+		def print_item():
+			grocery_list = add_value_to_list(self.path)
+
+			for item in grocery_list:
+				text_area.insert(tk.END, item + "\n")
+
+
+		def clear_item():
+			text_area.delete("1.0", tk.END)
+			clear_list(self.path)
+
+
+		text_area = tk.Text(frame, width=50, height=10)
+		text_area.pack(side="left", padx=10)
+
+
 		add_button = tk.Button(left_panel, 
 						text="Add Item", 
 						width=20, 
@@ -63,6 +79,26 @@ class Window:
 						bd=5, 
 						relief="groove",
 						command=re_item)
+		clear_button.pack(pady=10)
+
+		print_button = tk.Button(left_panel, 
+						text="Print List", 
+						width=20, 
+						height=1, 
+						font=("Victor Mono", 13, "bold", "italic"), 
+						bd=5, 
+						relief="groove",
+						command=print_item)
+		print_button.pack(pady=10)
+
+		clear_button = tk.Button(left_panel, 
+						text="Clear List", 
+						width=20, 
+						height=1, 
+						font=("Victor Mono", 13, "bold", "italic"), 
+						bd=5, 
+						relief="groove",
+						command=clear_item)
 		clear_button.pack(pady=10)
 
 		window.mainloop()
