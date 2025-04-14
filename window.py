@@ -101,4 +101,14 @@ class Window:
 						command=clear_item)
 		clear_button.pack(pady=10)
 
+		exit_button = tk.Button(left_panel, 
+						text="Exit", 
+						width=20, 
+						height=1, 
+						font=("Victor Mono", 13, "bold", "italic"), 
+						bd=5, 
+						relief="groove",
+						command=window.destroy)
+		exit_button.pack(pady=10)
+
 		window.mainloop()
