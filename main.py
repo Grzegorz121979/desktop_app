@@ -4,6 +4,7 @@ from window import Window
 def main():
 
     path = "todo.txt";
+    
     window = Window(path)
 
     window.create_window()

@@ -21,10 +21,7 @@ class Window:
 		left_panel = tk.Frame(frame)
 		left_panel.pack(side="left", padx=10)
 
-		entry = tk.Entry(frame, width=25)
-		entry.pack(side="left", padx=10)
-
-
+		
 		def add_item():
 			grocery_list = add_value_to_list(self.path)
 			value = entry.get()
@@ -46,19 +43,19 @@ class Window:
 
 
 		def print_item():
+			text_area.delete("1.0", tk.END)
 			grocery_list = add_value_to_list(self.path)
 
-			for item in grocery_list:
-				text_area.insert(tk.END, item + "\n")
+			if len(grocery_list) == 0:
+				text_area.insert(tk.END, "The grocery list is empty!")
+			else:
+				for item in grocery_list:
+					text_area.insert(tk.END, item + "\n")
 
 
 		def clear_item():
 			text_area.delete("1.0", tk.END)
 			clear_list(self.path)
-
-
-		text_area = tk.Text(frame, width=50, height=10)
-		text_area.pack(side="left", padx=10)
 
 
 		add_button = tk.Button(left_panel, 
@@ -110,5 +107,14 @@ class Window:
 						relief="groove",
 						command=window.destroy)
 		exit_button.pack(pady=10)
+
+		right_panel = tk.Frame(frame)
+		right_panel.pack(side="left", padx=20)
+
+		entry = tk.Entry(right_panel, width=50, font=("Victor Mono", 13, "bold", "italic"))
+		entry.pack(padx=10, pady=(0, 10), ipady=10)
+
+		text_area = tk.Text(right_panel, width=50, height=11, font=("Victor Mono", 13, "bold", "italic"))
+		text_area.pack(padx=10)
 
 		window.mainloop()
