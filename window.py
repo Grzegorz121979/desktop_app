@@ -29,6 +29,7 @@ class Window:
 			if value and value not in grocery_list:
 				append_item(self.path, value)
 				entry.delete(0, tk.END)
+				print_item()
 			else:
 				print(f"The {value} already exists on the list!")
 				entry.delete(0, tk.END)
@@ -40,6 +41,8 @@ class Window:
 
 			remove_item(self.path, value)
 			entry.delete(0, tk.END)
+
+			print_item()
 
 
 		def print_item():
