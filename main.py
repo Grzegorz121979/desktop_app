@@ -1,24 +1,16 @@
-# import csv
-# import pandas as pd
+import csv
 from window import Window
 # from list_function import append_item, remove_item, clear_list, print_grocery_list, add_value_to_list
 
 def main():
 
-    path = "todo.txt";
+    # path = "todo.txt";
+
+    path = "grocery.csv"
     
     window = Window(path)
 
     window.create_window()
-
-    # grocery = [
-    #     {"product": "apple", "quantity": 2},
-    #     {"product": "orange", "quantity": 1},
-    #     {"product": "melon", "quantity": 6},
-    # ]
-
-    # df = pd.DataFrame(grocery)
-    # df.to_csv("grocery.csv", index=False, encoding="utf-8")
 
     # print("Grocery List")
 

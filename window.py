@@ -1,4 +1,4 @@
-from list_function import append_item, add_value_to_list, remove_item, clear_list, print_grocery_list
+from list_function import append_item, add_value_to_list, remove_item, clear_list, print_grocery_list, open_csv
 import tkinter as tk
 
 class Window:
@@ -47,13 +47,16 @@ class Window:
 
 		def print_item():
 			text_area.delete("1.0", tk.END)
-			grocery_list = add_value_to_list(self.path)
+			# grocery_list = add_value_to_list(self.path)
+			grocery_list = open_csv(self.path)
 
 			if len(grocery_list) == 0:
 				text_area.insert(tk.END, "The grocery list is empty!")
 			else:
-				for item in grocery_list:
-					text_area.insert(tk.END, item + "\n")
+				for row in grocery_list:
+					text_area.insert(tk.END, f"{row["product"]}: {row["quantity"]}" + "\n")
+				# for item in grocery_list:
+				# 	text_area.insert(tk.END, item + "\n")
 
 
 		def clear_item():

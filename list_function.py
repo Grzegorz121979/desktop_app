@@ -1,3 +1,18 @@
+import csv
+
+def open_csv(path: str) -> list[dict[str, int]] | None:
+    """
+    Function open csv file and adding values to list of dictionary.
+    :param path: str
+    return: list[dict[str, int]]
+    """
+    with open(path, "r", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+        grocery_list = [dict(row) for row in reader]
+
+    return grocery_list
+
+
 def add_value_to_list(path: str) -> list[str] | None:
     """
     Function add value from txt file to list
