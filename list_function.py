@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 
 def open_csv(path: str) -> list[dict[str, int]] | None:
     """
@@ -6,11 +7,20 @@ def open_csv(path: str) -> list[dict[str, int]] | None:
     :param path: str
     return: list[dict[str, int]]
     """
+    grocery_list = []
     with open(path, "r", encoding="utf-8") as file:
         reader = csv.DictReader(file)
-        grocery_list = [dict(row) for row in reader]
+        for row in reader:
+            product = row["product"]
+            quantity = int(row["quantity"])
+            grocery_list.append({"product": product, "quantity": quantity})
 
     return grocery_list
+
+
+def save_value_to_csv(path: str, grocery: list[dict[str, int]]) -> None:
+    df = pd.DataFrame(grocery)
+    df.to_csv(path, index=False, encoding="utf-8")
 
 
 def add_value_to_list(path: str) -> list[str] | None:
