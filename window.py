@@ -1,4 +1,4 @@
-from list_function import append_item, add_value_to_list, remove_item, clear_list, print_grocery_list, open_csv, save_value_to_csv
+from list_function import remove_item, clear_list, print_grocery_list, open_csv, save_value_to_csv
 import tkinter as tk
 
 class Window:
@@ -23,31 +23,20 @@ class Window:
 
 		
 		def add_item():
-			# grocery_list = add_value_to_list(self.path)
 			grocery_list = open_csv(self.path)
 			value = entry.get()
-
-			for row in grocery_list:
-				if value == row["product"]:
-					row["quantity"] += 1
-					entry.delete(0, tk.END)
-					save_value_to_csv(self.path, grocery_list)
-					print_item()
-					break
-				else:
-					grocery_list.append(dict(product=value, quantity=1))
-					entry.delete(0, tk.END)
-					save_value_to_csv(self.path, grocery_list)
-					print_item()
-					break
-
-			# if value and value not in grocery_list:
-			# 	append_item(self.path, value)
-			# 	entry.delete(0, tk.END)
-			# 	print_item()
-			# else:
-			# 	print(f"The {value} already exists on the list!")
-			# 	entry.delete(0, tk.END)
+			item = any(product["product"] == value for product in grocery_list)
+			if item:
+				index = next(index for index, product in enumerate(grocery_list) if product["product"] == value)
+				grocery_list[index]["quantity"] += 1
+				entry.delete(0, tk.END)
+				save_value_to_csv(self.path, grocery_list)
+				print_item()
+			else:
+				grocery_list.append(dict(product=value, quantity=1))
+				entry.delete(0, tk.END)
+				save_value_to_csv(self.path, grocery_list)
+				print_item()
 
 
 		def re_item():
@@ -62,7 +51,6 @@ class Window:
 
 		def print_item():
 			text_area.delete("1.0", tk.END)
-			# grocery_list = add_value_to_list(self.path)
 			grocery_list = open_csv(self.path)
 
 			if len(grocery_list) == 0:
@@ -70,8 +58,6 @@ class Window:
 			else:
 				for row in grocery_list:
 					text_area.insert(tk.END, f"{row["product"]}: {row["quantity"]}" + "\n")
-				# for item in grocery_list:
-				# 	text_area.insert(tk.END, item + "\n")
 
 
 		def clear_item():

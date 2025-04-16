@@ -23,36 +23,6 @@ def save_value_to_csv(path: str, grocery: list[dict[str, int]]) -> None:
     df.to_csv(path, index=False, encoding="utf-8")
 
 
-def add_value_to_list(path: str) -> list[str] | None:
-    """
-    Function add value from txt file to list
-    :param path: str
-    :return: list[str]
-    """
-    with open(path, "r", encoding="utf-8") as f:
-        grocery_list = [line.strip() for line in f]
-
-    return grocery_list
-
-
-def append_item(path: str, user_input: str) -> None:
-    """
-    Function adding new elemet to the list
-    :param user_input: str
-    :path: str
-    """
-    grocery_list = add_value_to_list(path)
-
-    if user_input in grocery_list:
-        print("This element is on the grocery list")
-    else:
-        grocery_list.append(user_input)
-
-    with open(path, "w", encoding="utf-8") as f:
-        for item in grocery_list:
-            f.write(item + "\n")
-
-
 def remove_item(path: str, user_input: str) -> None:
     """
     Function removing elemet to the list
