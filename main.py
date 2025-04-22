@@ -1,7 +1,7 @@
+import tkinter as tk
 import csv
 import pandas as pd
 from list_function import remove_item, clear_list, print_grocery_list, open_csv, save_value_to_csv
-import tkinter as tk
 
 
 def main():
@@ -14,31 +14,67 @@ def main():
     def closed():
         root = tk.Toplevel(window)
         root.title("Exit")
-        root.geometry("220x140")
+
+        root_width = 220
+        root_height = 140
+
+        root.geometry(f"{root_width}x{root_height}")
         root.configure(bg="lightblue")
         root.resizable(False, False)
 
-        label = tk.Label(root, 
+        frame = tk.Frame(root, pady=5, padx=5)
+        frame.config(bg="lightblue")
+        frame.pack(fill="x")
+        frame.config(bg="lightblue")
+
+        screen_width = window.winfo_screenwidth()
+        screen_height = window.winfo_screenheight()
+
+        x = (screen_width - root_width) // 2
+        y = (screen_height - root_height) // 2
+
+        root.geometry(f"+{x}+{y}")
+
+        label = tk.Label(frame, 
                         text="Do you want exit?", 
                         font=("Victor Mono", 16, "bold", "italic"), 
                         bg="lightblue")
         label.pack(pady=20)
 
-        yes_button = tk.Button(root, 
+        yes_button = tk.Button(frame, 
                                 text="Ok", 
                                 width=8, 
                                 height=1, 
                                 font=("Victor Mono", 13, "bold", "italic"),
                                 command=closed_win)
-        yes_button.pack(padx=10, pady=5)
+        yes_button.pack(side="left", padx=15)
+
+        no_button = tk.Button(frame,
+                        text="NO",
+                        width=8,
+                        height=1,
+                        font=("Victor Mono", 13, ["bold", "italic"]), command=root.destroy)
+        no_button.pack(side="left", padx=5)
 
         root.mainloop()
 
     window = tk.Tk()
     window.title("Grocery List")
-    window.geometry("620x500")
+
+    main_window_width = 620
+    main_window_height = 500
+
+    window.geometry(f"{main_window_width}x{main_window_height}")
     window.configure(bg="lightblue")
     window.resizable(False, False)
+
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+
+    x = (screen_width - main_window_width) // 2
+    y = (screen_height - main_window_height) // 2
+
+    window.geometry(f"+{x}+{y}")
 
     label = tk.Label(window, text="Grocery List", font=("Victor Mono", 25, "bold", "italic"), bg="lightblue")
     label.pack(pady=15)
